@@ -1,6 +1,7 @@
 import 'reveal.js/dist/reveal.css';
 import 'reveal.js/dist/theme/black.css';
 import 'reveal.js/plugin/highlight/monokai.css';
+import './styles/tailwind.css';
 import Reveal from 'reveal.js';
 import Markdown from 'markdown-it';
 import mermaid from 'mermaid';
@@ -15,7 +16,7 @@ import RevealZoom from 'reveal.js/plugin/zoom/zoom.esm.js';
 
 import { renderMarkdownToSections } from './lib/markdown/splitter';
 import { useImageRenderer } from './lib/markdown/image';
-import { applyHighlightHook } from './lib/highlight.js';
+import { applyHighlightHook } from './lib/highlight';
 import { renderD3Blocks } from './lib/d3';
 import './styles/theme.css';
 import './styles/mermaid.css';

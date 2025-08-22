@@ -51,9 +51,39 @@ function main() {
     writeJSON(pkgPath, pkg);
   }
 
-  // tailwind minimal configs (files already present but optional)
-  if (!args.withTailwind) {
-    // keep files but not imported; user can enable later
+  // Tailwind optional wiring: add import & devDeps & postcss plugin
+  if (args.withTailwind) {
+    try {
+      // 1) import tailwind css in src/main.ts
+      const mainPath = join(targetDir, 'src', 'main.ts');
+      let mainTxt = readFileSync(mainPath, 'utf-8');
+      if (!/styles\/tailwind\.css/.test(mainTxt)) {
+        // 在 Reveal 样式导入之后添加
+        mainTxt = mainTxt.replace(
+          /(import 'reveal\.js\/plugin\/highlight\/monokai\.css';)/,
+          `$1\nimport './styles/tailwind.css';`
+        );
+        writeFileSync(mainPath, mainTxt);
+      }
+
+      // 2) extend devDependencies
+      const pkgPath = join(targetDir, 'package.json');
+      const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
+      pkg.devDependencies = pkg.devDependencies || {};
+      pkg.devDependencies["tailwindcss"] = pkg.devDependencies["tailwindcss"] || "^3.4.10";
+      pkg.devDependencies["@tailwindcss/typography"] = pkg.devDependencies["@tailwindcss/typography"] || "^0.5.13";
+      writeJSON(pkgPath, pkg);
+
+      // 3) postcss.config.cjs add tailwindcss plugin
+      const pcPath = join(targetDir, 'postcss.config.cjs');
+      if (existsSync(pcPath)) {
+        let pc = readFileSync(pcPath, 'utf-8');
+        if (!/tailwindcss/.test(pc)) {
+          pc = pc.replace(/plugins:\s*\[/, "plugins: [\n    require('tailwindcss'),");
+          writeFileSync(pcPath, pc);
+        }
+      }
+    } catch {}
   }
 
   // optional git init (avoid top-level await for Node compat)
