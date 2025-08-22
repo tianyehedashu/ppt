@@ -1,3 +1,6 @@
+import 'reveal.js/dist/reveal.css';
+import 'reveal.js/dist/theme/black.css';
+import 'reveal.js/plugin/highlight/monokai.css';
 import Reveal from 'reveal.js';
 import Markdown from 'markdown-it';
 import mermaid from 'mermaid';
@@ -31,7 +34,7 @@ async function bootstrap() {
     linkify: true,
     highlight: applyHighlightHook()
   });
-  useImageRenderer(md, { basePath: '/public/assets' });
+  useImageRenderer(md, { basePath: '/assets' });
 
   const { sectionsHtml } = renderMarkdownToSections(md, mdText);
   slidesRoot.innerHTML = sectionsHtml;
