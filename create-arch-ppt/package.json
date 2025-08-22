@@ -1,0 +1,19 @@
+{
+  "name": "create-arch-ppt",
+  "version": "0.1.0",
+  "type": "module",
+  "private": false,
+  "description": "Scaffold Reveal.js + Markdown + Mermaid + D3 architecture slides (with optional Tailwind)",
+  "bin": {
+    "create-arch-ppt": "bin/create-arch-ppt.js"
+  },
+  "files": [
+    "bin",
+    "templates"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
+}
+

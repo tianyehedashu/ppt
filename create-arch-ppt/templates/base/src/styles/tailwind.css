@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 注意：默认模板未 import 本文件，按需启用 */
+
+
