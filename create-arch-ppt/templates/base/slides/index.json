@@ -1,0 +1,83 @@
+{
+  "title": "我的架构演示",
+  "author": "架构师",
+  "slides": [
+    {
+      "id": "intro",
+      "title": "项目介绍",
+      "folder": "intro"
+    },
+    {
+      "id": "architecture", 
+      "title": "系统架构",
+      "folder": "architecture"
+    },
+    {
+      "id": "interactive",
+      "title": "交互式组件",
+      "folder": "interactive"
+    },
+    {
+      "id": "multimedia",
+      "title": "多媒体展示",
+      "folder": "multimedia"
+    },
+    {
+      "id": "html-demo",
+      "title": "HTML页面演示",
+      "folder": "html-demo"
+    },
+    {
+      "id": "fragments",
+      "title": "分步显示演示",
+      "folder": "fragments"
+    },
+    {
+      "id": "pure-html",
+      "title": "纯HTML演示",
+      "folder": "pure-html"
+    },
+    {
+      "id": "system-design",
+      "title": "系统设计专题",
+      "folder": "system-design",
+      "subSlides": [
+        {
+          "id": "architecture-principles",
+          "title": "架构设计原则",
+          "file": "architecture-principles.md"
+        },
+        {
+          "id": "data-modeling",
+          "title": "数据建模设计",
+          "file": "data-modeling.md"
+        },
+        {
+          "id": "performance-optimization",
+          "title": "性能优化策略",
+          "file": "performance-optimization.html"
+        },
+        {
+          "id": "security-design",
+          "title": "安全设计实现",
+          "file": "security-design.md"
+        },
+        {
+          "id": "frontend-architecture",
+          "title": "前端架构设计",
+          "file": "frontend-architecture.md"
+        }
+      ]
+    },
+    {
+      "id": "deployment",
+      "title": "部署方案", 
+      "folder": "deployment"
+    },
+    {
+      "id": "summary",
+      "title": "项目总结",
+      "folder": "summary"
+    }
+  ]
+}

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML 演示页面</title>
+    <style>
+        .html-demo {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .hero-section h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.5em;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .hero-section p {
+            margin: 0;
+            font-size: 1.2em;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .feature-card h3 {
+            color: #333;
+            margin: 0 0 15px 0;
+            font-size: 1.3em;
+        }
+        
+        .feature-card p {
+            color: #666;
+            margin: 0;
+            line-height: 1.6;
+        }
+        
+        .interactive-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+        
+        .demo-button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .demo-button:hover {
+            background: #45a049;
+            transform: scale(1.05);
+        }
+        
+        .demo-button.secondary {
+            background: #2196F3;
+        }
+        
+        .demo-button.secondary:hover {
+            background: #1976D2;
+        }
+        
+        .animation-box {
+            width: 100px;
+            height: 100px;
+            background: #ff6b6b;
+            margin: 20px auto;
+            border-radius: 10px;
+            transition: all 0.5s ease;
+        }
+        
+        .animation-box.animated {
+            background: #4ecdc4;
+            transform: rotate(45deg) scale(1.2);
+            border-radius: 50%;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            min-width: 120px;
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+            display: block;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="html-demo">
+        <div class="hero-section">
+            <h1>独立 HTML 页面演示</h1>
+            <p>完整的HTML、CSS和JavaScript支持</p>
+        </div>
+        
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>🎨 丰富样式</h3>
+                <p>使用完整的CSS支持，创建美观的界面设计和动画效果</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>⚡ 交互功能</h3>
+                <p>JavaScript提供完整的交互能力，包括事件处理和动态内容</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>📱 响应式设计</h3>
+                <p>适配各种屏幕尺寸，提供一致的用户体验</p>
+            </div>
+        </div>
+        
+        <div class="interactive-section">
+            <h2>交互演示</h2>
+            <p>点击按钮查看不同的动画效果：</p>
+            
+            <button class="demo-button" onclick="animateBox()">变换动画</button>
+            <button class="demo-button secondary" onclick="togglePulse()">脉冲效果</button>
+            <button class="demo-button" onclick="randomColor()" style="background: #ff9800;">随机颜色</button>
+            
+            <div id="animationBox" class="animation-box"></div>
+        </div>
+        
+        <div class="stats-container">
+            <div class="stat-item">
+                <span class="stat-number" id="counter1">0</span>
+                <div class="stat-label">页面访问</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="counter2">0</span>
+                <div class="stat-label">动画次数</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="counter3">0</span>
+                <div class="stat-label">交互事件</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 页面加载时的动画计数器
+        let visitCount = 0;
+        let animationCount = 0;
+        let interactionCount = 0;
+        
+        // 初始化页面
+        document.addEventListener('DOMContentLoaded', function() {
+            visitCount++;
+            updateCounters();
+            
+            // 启动数字动画
+            animateNumber('counter1', 1248);
+            setTimeout(() => animateNumber('counter2', 342), 200);
+            setTimeout(() => animateNumber('counter3', 89), 400);
+        });
+        
+        function animateBox() {
+            const box = document.getElementById('animationBox');
+            box.classList.toggle('animated');
+            animationCount++;
+            interactionCount++;
+            updateCounters();
+        }
+        
+        function togglePulse() {
+            const box = document.getElementById('animationBox');
+            box.classList.toggle('pulse-animation');
+            interactionCount++;
+            updateCounters();
+        }
+        
+        function randomColor() {
+            const box = document.getElementById('animationBox');
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3', '#54a0ff'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            box.style.backgroundColor = randomColor;
+            interactionCount++;
+            updateCounters();
+        }
+        
+        function updateCounters() {
+            document.getElementById('counter2').textContent = animationCount;
+            document.getElementById('counter3').textContent = interactionCount;
+        }
+        
+        function animateNumber(elementId, targetNumber) {
+            const element = document.getElementById(elementId);
+            const duration = 1500;
+            const startTime = Date.now();
+            
+            function updateNumber() {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // 使用缓动函数
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+                const currentNumber = Math.floor(targetNumber * easeOut);
+                
+                element.textContent = currentNumber;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateNumber);
+                }
+            }
+            
+            updateNumber();
+        }
+        
+        // 为所有功能卡片添加点击效果
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+                interactionCount++;
+                updateCounters();
+            });
+        });
+    </script>
+</body>
+</html>

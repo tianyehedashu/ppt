@@ -3,7 +3,7 @@
   "version": "0.2.0",
   "type": "module",
   "private": false,
-  "description": "Scaffold Reveal.js + Markdown + Mermaid + D3 architecture slides (with optional Tailwind)",
+  "description": "Create professional architecture presentations with Reveal.js + Markdown + Mermaid (optional D3 & Tailwind)",
   "bin": {
     "create-arch-ppt": "bin/create-arch-ppt.js"
   },

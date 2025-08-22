@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas 动画演示</title>
+    <style>
+        .canvas-demo {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .canvas-container {
+            margin: 30px 0;
+            position: relative;
+            display: inline-block;
+        }
+        
+        canvas {
+            border: 2px solid #667eea;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .controls {
+            margin: 20px 0;
+        }
+        
+        .control-button {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            margin: 5px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .control-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        .control-button:active {
+            transform: translateY(0);
+        }
+        
+        .settings {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .setting-group {
+            margin: 15px 0;
+        }
+        
+        .setting-group label {
+            display: inline-block;
+            width: 120px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .setting-group input[type="range"] {
+            width: 200px;
+            margin: 0 10px;
+        }
+        
+        .setting-group input[type="color"] {
+            width: 50px;
+            height: 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .info-panel {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .info-panel h3 {
+            margin: 0 0 10px 0;
+            color: #1976D2;
+        }
+        
+        .info-panel p {
+            margin: 5px 0;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="canvas-demo">
+        <h1>Canvas 粒子动画</h1>
+        <p>使用HTML5 Canvas和JavaScript创建的实时粒子系统</p>
+        
+        <div class="canvas-container">
+            <canvas id="particleCanvas" width="600" height="400"></canvas>
+        </div>
+        
+        <div class="controls">
+            <button class="control-button" onclick="startAnimation()">开始动画</button>
+            <button class="control-button" onclick="stopAnimation()">停止动画</button>
+            <button class="control-button" onclick="resetParticles()">重置粒子</button>
+            <button class="control-button" onclick="toggleTrails()">切换轨迹</button>
+        </div>
+        
+        <div class="settings">
+            <h3>动画参数设置</h3>
+            
+            <div class="setting-group">
+                <label>粒子数量:</label>
+                <input type="range" id="particleCount" min="10" max="200" value="100" onchange="updateParticleCount(this.value)">
+                <span id="particleCountValue">100</span>
+            </div>
+            
+            <div class="setting-group">
+                <label>移动速度:</label>
+                <input type="range" id="speed" min="1" max="10" value="3" onchange="updateSpeed(this.value)">
+                <span id="speedValue">3</span>
+            </div>
+            
+            <div class="setting-group">
+                <label>粒子颜色:</label>
+                <input type="color" id="particleColor" value="#4ecdc4" onchange="updateColor(this.value)">
+            </div>
+            
+            <div class="setting-group">
+                <label>连线距离:</label>
+                <input type="range" id="connectionDistance" min="50" max="200" value="100" onchange="updateConnectionDistance(this.value)">
+                <span id="connectionDistanceValue">100</span>
+            </div>
+        </div>
+        
+        <div class="info-panel">
+            <h3>技术特性</h3>
+            <p><strong>渲染引擎:</strong> HTML5 Canvas API</p>
+            <p><strong>动画帧率:</strong> 60 FPS (使用 requestAnimationFrame)</p>
+            <p><strong>粒子系统:</strong> 实时物理模拟和碰撞检测</p>
+            <p><strong>交互性:</strong> 鼠标跟踪和参数实时调整</p>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        let particles = [];
+        let animationId;
+        let isAnimating = false;
+        let showTrails = false;
+        
+        // 动画参数
+        let particleCount = 100;
+        let speed = 3;
+        let particleColor = '#4ecdc4';
+        let connectionDistance = 100;
+        
+        // 鼠标位置
+        let mouse = { x: 0, y: 0 };
+        
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * speed;
+                this.vy = (Math.random() - 0.5) * speed;
+                this.radius = Math.random() * 3 + 1;
+                this.opacity = Math.random() * 0.5 + 0.5;
+            }
+            
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                
+                // 边界反弹
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+                
+                // 鼠标吸引力
+                const dx = mouse.x - this.x;
+                const dy = mouse.y - this.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < 150) {
+                    const force = (150 - distance) / 150;
+                    this.vx += (dx / distance) * force * 0.03;
+                    this.vy += (dy / distance) * force * 0.03;
+                }
+                
+                // 限制速度
+                const maxSpeed = speed;
+                const currentSpeed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+                if (currentSpeed > maxSpeed) {
+                    this.vx = (this.vx / currentSpeed) * maxSpeed;
+                    this.vy = (this.vy / currentSpeed) * maxSpeed;
+                }
+            }
+            
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = particleColor + Math.floor(this.opacity * 255).toString(16).padStart(2, '0');
+                ctx.fill();
+            }
+        }
+        
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+        
+        function drawConnections() {
+            ctx.strokeStyle = particleColor + '20';
+            ctx.lineWidth = 1;
+            
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < connectionDistance) {
+                        const opacity = (connectionDistance - distance) / connectionDistance;
+                        ctx.strokeStyle = particleColor + Math.floor(opacity * 50).toString(16).padStart(2, '0');
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+        
+        function animate() {
+            if (!showTrails) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            } else {
+                ctx.fillStyle = 'rgba(30, 60, 114, 0.1)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
+            
+            drawConnections();
+            
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            
+            if (isAnimating) {
+                animationId = requestAnimationFrame(animate);
+            }
+        }
+        
+        function startAnimation() {
+            if (!isAnimating) {
+                isAnimating = true;
+                animate();
+            }
+        }
+        
+        function stopAnimation() {
+            isAnimating = false;
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+            }
+        }
+        
+        function resetParticles() {
+            initParticles();
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+        
+        function toggleTrails() {
+            showTrails = !showTrails;
+            if (!showTrails) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+        }
+        
+        function updateParticleCount(value) {
+            particleCount = parseInt(value);
+            document.getElementById('particleCountValue').textContent = value;
+            initParticles();
+        }
+        
+        function updateSpeed(value) {
+            speed = parseInt(value);
+            document.getElementById('speedValue').textContent = value;
+        }
+        
+        function updateColor(value) {
+            particleColor = value;
+        }
+        
+        function updateConnectionDistance(value) {
+            connectionDistance = parseInt(value);
+            document.getElementById('connectionDistanceValue').textContent = value;
+        }
+        
+        // 鼠标事件
+        canvas.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            mouse.x = e.clientX - rect.left;
+            mouse.y = e.clientY - rect.top;
+        });
+        
+        canvas.addEventListener('mouseleave', () => {
+            mouse.x = canvas.width / 2;
+            mouse.y = canvas.height / 2;
+        });
+        
+        // 初始化
+        initParticles();
+        startAnimation();
+    </script>
+</body>
+</html>

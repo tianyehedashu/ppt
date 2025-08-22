@@ -1,0 +1,25 @@
+{
+  "name": "arch-ppt",
+  "private": true,
+  "version": "0.2.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "d3": "^7.9.0",
+    "markdown-it": "^14.1.0",
+    "mermaid": "^10.9.1",
+    "reveal.js": "^5.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.2",
+    "vite": "^5.4.6",
+    "autoprefixer": "^10.4.20",
+    "@types/markdown-it": "^14.1.2",
+    "@types/node": "^22.5.4"
+  }
+}
+

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>纯HTML幻灯片演示</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="slide-container">
+        <header class="slide-header">
+            <h1>🎨 纯HTML幻灯片</h1>
+            <p class="subtitle">展示完整的HTML、CSS、JavaScript集成</p>
+        </header>
+        
+        <main class="slide-content">
+            <section class="feature-overview">
+                <h2>✨ 核心特性</h2>
+                <div class="features-grid">
+                    <div class="feature-item fragment">
+                        <div class="feature-icon">🚀</div>
+                        <h3>高性能</h3>
+                        <p>优化的渲染和加载策略</p>
+                    </div>
+                    
+                    <div class="feature-item fragment">
+                        <div class="feature-icon">🎨</div>
+                        <h3>美观设计</h3>
+                        <p>现代化的视觉效果</p>
+                    </div>
+                    
+                    <div class="feature-item fragment">
+                        <div class="feature-icon">⚡</div>
+                        <h3>快速响应</h3>
+                        <p>流畅的用户交互体验</p>
+                    </div>
+                    
+                    <div class="feature-item fragment">
+                        <div class="feature-icon">🔧</div>
+                        <h3>易于定制</h3>
+                        <p>灵活的配置和扩展</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="demo-section fragment">
+                <h2>🎯 交互演示</h2>
+                <div class="interactive-demo">
+                    <button id="animateBtn" class="demo-button">启动动画</button>
+                    <button id="resetBtn" class="demo-button secondary">重置</button>
+                    
+                    <div class="animation-area">
+                        <div id="movingBox" class="moving-box"></div>
+                    </div>
+                    
+                    <div class="progress-container">
+                        <div class="progress-label">加载进度:</div>
+                        <div class="progress-bar">
+                            <div id="progressFill" class="progress-fill"></div>
+                        </div>
+                        <div id="progressText" class="progress-text">0%</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="stats-section fragment">
+                <h2>📊 实时统计</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="visitorCount">0</div>
+                        <div class="stat-label">访问次数</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="animationCount">0</div>
+                        <div class="stat-label">动画次数</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="interactionCount">0</div>
+                        <div class="stat-label">交互次数</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="slide-footer fragment">
+            <div class="tech-stack">
+                <span class="tech-item">HTML5</span>
+                <span class="tech-item">CSS3</span>
+                <span class="tech-item">JavaScript ES6+</span>
+                <span class="tech-item">Reveal.js</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

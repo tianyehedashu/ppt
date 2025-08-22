@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>复杂HTML演示</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .main-container {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            color: white;
+            min-height: 500px;
+        }
+        
+        .hero-section {
+            text-align: center;
+            padding: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-title {
+            font-size: 3em;
+            margin: 0 0 20px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: slideInFromTop 1s ease-out;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3em;
+            opacity: 0.9;
+            margin: 0;
+            animation: slideInFromBottom 1s ease-out 0.5s both;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .feature-panel {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+            display: block;
+            text-align: center;
+        }
+        
+        .feature-title {
+            font-size: 1.4em;
+            margin: 0 0 15px 0;
+            text-align: center;
+        }
+        
+        .feature-description {
+            line-height: 1.6;
+            opacity: 0.9;
+            text-align: center;
+        }
+        
+        .interactive-demo {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .demo-button {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+        
+        .demo-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+        }
+        
+        .demo-button.secondary {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);
+        }
+        
+        .demo-button.secondary:hover {
+            box-shadow: 0 8px 25px rgba(78, 205, 196, 0.4);
+        }
+        
+        @keyframes slideInFromTop {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInFromBottom {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .floating-element {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        
+        .status-display {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+        }
+        
+        .status-value {
+            color: #4ecdc4;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="hero-section">
+            <div class="floating-elements">
+                <div class="floating-element" style="top: 10%; left: 20%; animation-delay: 0s;"></div>
+                <div class="floating-element" style="top: 70%; left: 80%; animation-delay: 2s;"></div>
+                <div class="floating-element" style="top: 30%; left: 70%; animation-delay: 4s;"></div>
+            </div>
+            
+            <h1 class="hero-title">🚀 复杂HTML演示</h1>
+            <p class="hero-subtitle">完整的HTML文件夹渲染功能展示</p>
+        </div>
+        
+        <div class="content-grid">
+            <div class="feature-panel">
+                <span class="feature-icon">🎨</span>
+                <h3 class="feature-title">外部样式表</h3>
+                <p class="feature-description">支持加载外部CSS文件，实现复杂的样式设计和主题切换</p>
+            </div>
+            
+            <div class="feature-panel">
+                <span class="feature-icon">🖼️</span>
+                <h3 class="feature-title">资源引用</h3>
+                <p class="feature-description">自动处理相对路径的图片、字体等资源文件引用</p>
+            </div>
+            
+            <div class="feature-panel">
+                <span class="feature-icon">⚡</span>
+                <h3 class="feature-title">脚本支持</h3>
+                <p class="feature-description">完整支持JavaScript交互和外部脚本文件加载</p>
+            </div>
+        </div>
+        
+        <div class="interactive-demo">
+            <h3>📊 实时数据展示</h3>
+            <div class="status-display" id="statusDisplay">
+                <div class="status-item">
+                    <span>系统状态:</span>
+                    <span class="status-value" id="systemStatus">运行中</span>
+                </div>
+                <div class="status-item">
+                    <span>内存使用:</span>
+                    <span class="status-value" id="memoryUsage">0 MB</span>
+                </div>
+                <div class="status-item">
+                    <span>活跃连接:</span>
+                    <span class="status-value" id="activeConnections">0</span>
+                </div>
+                <div class="status-item">
+                    <span>运行时间:</span>
+                    <span class="status-value" id="uptime">00:00:00</span>
+                </div>
+            </div>
+            
+            <button class="demo-button" onclick="startMonitoring()">开始监控</button>
+            <button class="demo-button secondary" onclick="stopMonitoring()">停止监控</button>
+            <button class="demo-button" onclick="resetStats()">重置数据</button>
+        </div>
+        
+        <div class="feature-panel" style="margin-top: 30px;">
+            <h3 style="text-align: center; margin-bottom: 20px;">📁 外部资源演示</h3>
+            <div style="text-align: center;">
+                <img src="demo-image.jpg" alt="演示图片" style="max-width: 200px; border-radius: 10px; margin: 10px;" 
+                     onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjY2NjIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgZmlsbD0iIzY2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPuatu+S+i+WbvueJhzwvdGV4dD4KPC9zdmc+'">
+                <p style="margin: 15px 0 0 0; opacity: 0.8;">外部图片资源引用示例</p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+    <script>
+        let monitoringInterval;
+        let startTime = Date.now();
+        let isMonitoring = false;
+        
+        function startMonitoring() {
+            if (isMonitoring) return;
+            
+            isMonitoring = true;
+            startTime = Date.now();
+            
+            monitoringInterval = setInterval(() => {
+                updateStats();
+            }, 1000);
+            
+            updateStats();
+        }
+        
+        function stopMonitoring() {
+            if (monitoringInterval) {
+                clearInterval(monitoringInterval);
+                isMonitoring = false;
+            }
+        }
+        
+        function resetStats() {
+            stopMonitoring();
+            startTime = Date.now();
+            
+            document.getElementById('systemStatus').textContent = '已停止';
+            document.getElementById('memoryUsage').textContent = '0 MB';
+            document.getElementById('activeConnections').textContent = '0';
+            document.getElementById('uptime').textContent = '00:00:00';
+        }
+        
+        function updateStats() {
+            const now = Date.now();
+            const uptime = Math.floor((now - startTime) / 1000);
+            
+            // 模拟数据
+            const memory = Math.floor(Math.random() * 512) + 256;
+            const connections = Math.floor(Math.random() * 100) + 10;
+            
+            document.getElementById('systemStatus').textContent = '运行中';
+            document.getElementById('memoryUsage').textContent = memory + ' MB';
+            document.getElementById('activeConnections').textContent = connections.toString();
+            document.getElementById('uptime').textContent = formatUptime(uptime);
+        }
+        
+        function formatUptime(seconds) {
+            const hours = Math.floor(seconds / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            const secs = seconds % 60;
+            
+            return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+        
+        // 页面加载完成后自动开始监控
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('复杂HTML页面加载完成');
+            
+            // 添加一些交互效果
+            document.querySelectorAll('.feature-panel').forEach(panel => {
+                panel.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

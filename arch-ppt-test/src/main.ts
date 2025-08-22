@@ -108,7 +108,7 @@ async function loadMarkdown(src: string): Promise<string> {
 function createMarkdownRenderer(): Markdown {
   try {
     const md = new Markdown({
-      html: true,  // 启用HTML标签支持
+      html: false,
       linkify: true,
       typographer: true,
       highlight: applyHighlightHook()

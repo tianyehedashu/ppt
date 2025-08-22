@@ -1,0 +1,26 @@
+{
+  "title": "我的架构演示",
+  "author": "架构师",
+  "slides": [
+    {
+      "id": "intro",
+      "title": "项目介绍",
+      "folder": "intro"
+    },
+    {
+      "id": "architecture", 
+      "title": "系统架构",
+      "folder": "architecture"
+    },
+    {
+      "id": "deployment",
+      "title": "部署方案", 
+      "folder": "deployment"
+    },
+    {
+      "id": "summary",
+      "title": "项目总结",
+      "folder": "summary"
+    }
+  ]
+}

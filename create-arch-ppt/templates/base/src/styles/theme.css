@@ -155,6 +155,56 @@
   }
 }
 
+/* HTML 幻灯片样式 */
+.reveal .slides .html-slide {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  text-align: left;
+}
+
+/* 确保HTML内容不会与Reveal.js冲突 */
+.reveal .slides .html-slide h1,
+.reveal .slides .html-slide h2,
+.reveal .slides .html-slide h3,
+.reveal .slides .html-slide h4,
+.reveal .slides .html-slide h5,
+.reveal .slides .html-slide h6 {
+  color: inherit;
+  font-family: inherit;
+  line-height: inherit;
+  text-transform: none;
+  text-shadow: none;
+}
+
+.reveal .slides .html-slide p {
+  color: inherit;
+  font-family: inherit;
+  line-height: inherit;
+}
+
+/* 确保HTML页面的按钮和表单元素正常工作 */
+.reveal .slides .html-slide button,
+.reveal .slides .html-slide input,
+.reveal .slides .html-slide select,
+.reveal .slides .html-slide textarea {
+  pointer-events: auto;
+  font-family: inherit;
+}
+
+/* 为HTML页面提供一些基础的响应式支持 */
+.reveal .slides .html-slide {
+  font-size: calc(0.8em + 0.5vw);
+}
+
+/* HTML幻灯片在移动设备上的优化 */
+@media (max-width: 768px) {
+  .reveal .slides .html-slide {
+    font-size: calc(0.7em + 0.8vw);
+    padding: 10px;
+  }
+}
+
 /* 打印样式优化 */
 @media print {
   .reveal .slides [data-d3] {
@@ -165,5 +215,9 @@
   .reveal .slides img.md-image {
     box-shadow: none;
     border: 1px solid #ddd;
+  }
+  
+  .reveal .slides .html-slide {
+    overflow: visible;
   }
 }
